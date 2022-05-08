@@ -1,0 +1,15 @@
+spring:
+  profiles:
+    active: local
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/playstay
+    username: root
+    password: root1234
+
+mybatis:
+  type-aliases-package: com.world.playstay.*.mapper
+  mapper-locations: mybatis/mapper/*.xml
+
+
