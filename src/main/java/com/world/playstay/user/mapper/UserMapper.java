@@ -8,5 +8,5 @@ import org.apache.ibatis.annotations.Mapper;
 public interface UserMapper {
   void insert(UserDto userDto);
   void delete(String id);
-  UserDto findById(String id);
+  UserDto findById(Long id);
 }
