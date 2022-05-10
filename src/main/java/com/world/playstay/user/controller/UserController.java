@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-@ResponseBody
 @RequestMapping("/users")
 public class UserController {
 
