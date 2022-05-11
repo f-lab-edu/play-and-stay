@@ -1,7 +1,10 @@
 package com.world.playstay.user.exception;
 
-public class UserNotFoundException extends RuntimeException{
+import com.world.playstay.global.error.GlobalHttpException;
+import org.springframework.http.HttpStatus;
+
+public class UserNotFoundException extends GlobalHttpException {
   public UserNotFoundException(String message){
-    super(message);
+    super(HttpStatus.NOT_FOUND, message);
   }
 }
