@@ -12,3 +12,5 @@ mybatis:
 logging:
   level:
     root: ${LOGGING_LEVEL_ROOT:debug}
+  dir:
+    ./logs
