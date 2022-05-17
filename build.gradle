@@ -14,17 +14,41 @@ configurations {
 	}
 }
 
+/**
+ * Gradle 라이브러리를 받아올 원격 중앙저장소. mavenCentral()과 jCenter()가 있다.
+ */
 repositories {
 	mavenCentral()
 }
 
+ext {
+	mybatisSpringBootStarterVersion = "2.2.0"
+	mysqlConnectorJavaVersion = "8.0.25"
+}
+
+/**
+ *
+ * compile: 해당 모듈을 직간접적으로 의존하는 모든 모듈이 recompile 된다.
+ * implementation: 해당 모듈을 직접 의존하는 모듈만 recompile 된다.
+ * compileOnly: compile time에만 빌드한다. runtime에 필요 없는 라이브러리
+ * runtimeOnly: runtime에만 필요한 라이브러리
+ */
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	// MyBatis
+	implementation "org.mybatis.spring.boot:mybatis-spring-boot-starter:${mybatisSpringBootStarterVersion}"
+	runtimeOnly "mysql:mysql-connector-java:${mysqlConnectorJavaVersion}"
 }
 
+
+/**
+ * task: Gradle 프로젝트의 작업 단위.
+ * Gradle의 내부 task와 사용자가 정의한 task
+ */
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
