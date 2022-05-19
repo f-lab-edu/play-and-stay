@@ -27,11 +27,8 @@ ext {
 }
 
 /**
- *
- * compile: 해당 모듈을 직간접적으로 의존하는 모든 모듈이 recompile 된다.
  * implementation: 해당 모듈을 직접 의존하는 모듈만 recompile 된다.
- * compileOnly: compile time에만 빌드한다. runtime에 필요 없는 라이브러리
- * runtimeOnly: runtime에만 필요한 라이브러리
+ * api: 상위 모듈까지 compile 된다.
  */
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
