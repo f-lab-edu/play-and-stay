@@ -1,7 +1,6 @@
 package com.world.playstay.global.error;
 
 import lombok.Getter;
-import org.slf4j.Logger;
 import org.springframework.http.HttpStatus;
 
 /**
@@ -19,14 +18,5 @@ public abstract class GlobalHttpException extends RuntimeException {
     this.status = status;
     this.message = message;
     this.logLevel = logLevel;
-  }
-
-  public void createLog(Logger logger, String errorCode){
-    LogLevel logLevel = this.getLogLevel();
-    if (logLevel == LogLevel.ERROR){
-      logger.error("[EXCEPTION] errorCode: {} | message: {}", errorCode, this.getMessage());
-    } else{
-      logger.debug("[EXCEPTION] errorCode: {} | message: {}", errorCode, this.getMessage());
-    }
   }
 }

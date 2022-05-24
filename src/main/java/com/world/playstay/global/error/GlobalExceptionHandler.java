@@ -1,5 +1,6 @@
 package com.world.playstay.global.error;
 
+import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -16,17 +17,29 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class GlobalExceptionHandler {
   private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
+  public void createLog(LogLevel logLevel, String errorCode, String message, String requestPath){
+    if (logLevel == LogLevel.NONE){
+      return;
+    }
+    if (logLevel == LogLevel.ERROR){
+      logger.error("[EXCEPTION] path: {} | errorCode: {} | message: {}", requestPath, errorCode, message);
+    }
+    else{
+      logger.warn("[EXCEPTION] path: {} | errorCode: {} | message: {}", requestPath, errorCode, message);
+    }
+  }
+
   @ExceptionHandler(GlobalHttpException.class)
-  public ResponseEntity<GlobalExceptionResponse> handleGlobalHttpException(GlobalHttpException e){
-    GlobalExceptionResponse response = new GlobalExceptionResponse(e.getStatus(), e.getClass().getSimpleName(), e.getMessage());
-    e.createLog(logger, e.getClass().getSimpleName());
+  public ResponseEntity<GlobalExceptionResponse> handleGlobalHttpException(GlobalHttpException e,  HttpServletRequest request){
+    GlobalExceptionResponse response = new GlobalExceptionResponse(e.getStatus(), e.getClass().getSimpleName(), e.getMessage(), request.getRequestURI());
+    createLog(e.getLogLevel(),  e.getClass().getSimpleName(), e.getMessage(), request.getRequestURI());
     return ResponseEntity.status(e.getStatus()).body(response);
   }
 
   @ExceptionHandler(Exception.class)
-  public ResponseEntity<GlobalExceptionResponse> handleException(Exception e){
-    GlobalExceptionResponse response = new GlobalExceptionResponse(HttpStatus.INTERNAL_SERVER_ERROR, e.getClass().getSimpleName(), e.getMessage());
-    logger.error("[EXCEPTION] errorCode: {} | message: {}", e.getClass().getSimpleName(), e.getMessage());
+  public ResponseEntity<GlobalExceptionResponse> handleException(Exception e, HttpServletRequest request){
+    GlobalExceptionResponse response = new GlobalExceptionResponse(HttpStatus.INTERNAL_SERVER_ERROR, e.getClass().getSimpleName(), e.getMessage(), request.getRequestURI());
+    createLog(LogLevel.ERROR,  e.getClass().getSimpleName(), e.getMessage(), request.getRequestURI());
     return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
   }
 }
