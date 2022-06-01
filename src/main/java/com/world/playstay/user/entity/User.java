@@ -1,4 +1,4 @@
-package com.world.playstay.user.dto;
+package com.world.playstay.user.entity;
 
 import java.util.Date;
 import lombok.AllArgsConstructor;
@@ -10,10 +10,11 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserDto {
+public class User {
 
   private Long id;
   private String name;
   private String email;
   private Date createdAt;
 }
+

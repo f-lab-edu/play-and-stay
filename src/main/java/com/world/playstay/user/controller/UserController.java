@@ -2,6 +2,8 @@ package com.world.playstay.user.controller;
 
 import com.world.playstay.global.error.GlobalExceptionResponse;
 import com.world.playstay.user.dto.UserDto;
+import com.world.playstay.user.entity.User;
+import com.world.playstay.user.mapper.UserMapstructMapper;
 import com.world.playstay.user.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -28,13 +30,15 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
 
   private final UserService userService;
+  private final UserMapstructMapper userMapstructMapper;
   private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
   @Operation(summary = "유저 생성")
   @ApiResponse(responseCode = "200")
   @PostMapping()
   public void create(UserDto userDto) {
-    userService.join(userDto);
+    User user = userMapstructMapper.toEntity(userDto);
+    userService.join(user);
   }
 
   @Operation(summary = "유저 조회", description = "유저 id로 유저 조회하기")
@@ -48,7 +52,8 @@ public class UserController {
   })
   @GetMapping("/{id}")
   public ResponseEntity<UserDto> findUserById(@PathVariable("id") Long id) {
-    UserDto userDto = userService.findUser(id);
+    User user = userService.findUser(id);
+    UserDto userDto = userMapstructMapper.toDto(user);
     return ResponseEntity.ok().body(userDto);
   }
 

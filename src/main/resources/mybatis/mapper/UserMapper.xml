@@ -3,7 +3,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.world.playstay.user.dao.UserMapper">
-    <insert id="insert" parameterType="com.world.playstay.user.dto.UserDto">
+    <insert id="insert" parameterType="com.world.playstay.user.entity.User">
         INSERT INTO USER (name, email)
         VALUES (#{name}, #{email})
     </insert>
@@ -12,7 +12,7 @@
         DELETE FROM USER WHERE id = #{id}
     </delete>
 
-    <select id="findById" parameterType="Long" resultType="com.world.playstay.user.dto.UserDto">
+    <select id="findById" parameterType="Long" resultType="com.world.playstay.user.entity.User">
         SELECT id, name, email, created_at
         FROM USER
         WHERE id = #{id}
