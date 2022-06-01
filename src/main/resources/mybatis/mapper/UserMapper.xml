@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.world.playstay.user.mapper.UserMapper">
+<mapper namespace="com.world.playstay.user.dao.UserMapper">
     <insert id="insert" parameterType="com.world.playstay.user.dto.UserDto">
         INSERT INTO USER (name, email)
         VALUES (#{name}, #{email})
