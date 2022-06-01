@@ -3,9 +3,9 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.world.playstay.user.dao.UserMapper">
-    <insert id="insert" parameterType="com.world.playstay.user.entity.User">
-        INSERT INTO USER (name, email)
-        VALUES (#{name}, #{email})
+    <insert id="insert" parameterType="com.world.playstay.user.dto.UserDto">
+        INSERT INTO USER (id, name, email)
+        VALUES (#{id}, #{name}, #{email})
     </insert>
 
     <delete id="delete" parameterType="Long">
@@ -16,5 +16,11 @@
         SELECT id, name, email, created_at
         FROM USER
         WHERE id = #{id}
+    </select>
+
+    <select id="findAll" parameterType="Long" resultType="com.world.playstay.user.entity.User">
+        SELECT id, name, email, created_at
+        FROM USER
+        ORDER BY created_at DESC
     </select>
 </mapper>

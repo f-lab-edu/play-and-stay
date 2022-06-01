@@ -13,10 +13,11 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import java.util.List;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,30 +32,60 @@ public class UserController {
 
   private final UserService userService;
   private final UserMapstructMapper userMapstructMapper;
-  private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
+  private UserDto toDto(User user){
+    return userMapstructMapper.toDto(user);
+  }
+
+  private User toEntity(UserDto userDto){
+    return userMapstructMapper.toEntity(userDto);
+  }
 
   @Operation(summary = "유저 생성")
-  @ApiResponse(responseCode = "200")
+  @ApiResponses({
+      @ApiResponse(responseCode = "201", description = "USER CREATED", content = @Content(schema = @Schema(implementation = UserDto.class))),
+      @ApiResponse(responseCode = "400", description = "DUPLICATED USER", content = @Content(schema = @Schema(implementation = GlobalExceptionResponse.class))),
+  })
   @PostMapping()
-  public void create(UserDto userDto) {
-    User user = userMapstructMapper.toEntity(userDto);
+  public void createUser(UserDto userDto) {
+    User user = toEntity(userDto);
     userService.join(user);
+  }
+
+  @Operation(summary = "유저 삭제")
+  @ApiResponses({
+      @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = UserDto.class))),
+      @ApiResponse(responseCode = "404", description = "USER NOT FOUND", content = @Content(schema = @Schema(implementation = GlobalExceptionResponse.class))),
+  })
+  @Parameters({
+      @Parameter(name = "id", description = "아이디", example = "1"),
+  })
+  @DeleteMapping("/{id}")
+  public void deleteUser(@PathVariable("id") Long id) {
+    userService.remove(id);
   }
 
   @Operation(summary = "유저 조회", description = "유저 id로 유저 조회하기")
   @ApiResponses({
       @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = UserDto.class))),
       @ApiResponse(responseCode = "404", description = "USER NOT FOUND", content = @Content(schema = @Schema(implementation = GlobalExceptionResponse.class))),
-      @ApiResponse(responseCode = "500", description = "INTERNAL SERVER ERROR", content = @Content(schema = @Schema(implementation = GlobalExceptionResponse.class))),
   })
   @Parameters({
       @Parameter(name = "id", description = "아이디", example = "1"),
   })
   @GetMapping("/{id}")
-  public ResponseEntity<UserDto> findUserById(@PathVariable("id") Long id) {
-    User user = userService.findUser(id);
-    UserDto userDto = userMapstructMapper.toDto(user);
+  public ResponseEntity<UserDto> getUser(@PathVariable("id") Long id) {
+    UserDto userDto = toDto(userService.getUser(id));
     return ResponseEntity.ok().body(userDto);
+  }
+
+  @Operation(summary = "모든 유저 조회")
+  @ApiResponse(responseCode = "200")
+  @GetMapping()
+  public List<UserDto> getUsers() {
+    return userService.getUsers().stream()
+        .map(this::toDto)
+        .collect(Collectors.toList());
   }
 
 }
