@@ -37,3 +37,10 @@ sudo chmod 755 .git/hooks/prepare-commit-msg
 ```
 ${SERVER_HOST}/swagger-ui/index.html
 ```
+
+
+- Testing
+```
+./gradlew build -x test
+SPRING_PROFILES_ACTIVE=[test] ./gradlew test
+```
