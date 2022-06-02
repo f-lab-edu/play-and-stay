@@ -63,7 +63,7 @@ test {
 jacocoTestReport {
     reports {
         html.enabled true
-        csv.enabled false
+        csv.enabled true
         xml.enabled false
     }
     // jacocoTestReport 실행하고 jacocoTestCoverageVerification를 실행
