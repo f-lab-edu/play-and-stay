@@ -70,7 +70,7 @@ jacocoTestReport {
         xml.enabled false
     }
     // jacocoTestReport 실행하고 jacocoTestCoverageVerification를 실행
-    finalizedBy 'jacocoTestCoverageVerification'
+//    finalizedBy 'jacocoTestCoverageVerification'
 }
 
 jacocoTestCoverageVerification {
