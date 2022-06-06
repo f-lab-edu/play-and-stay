@@ -18,17 +18,22 @@ public class GlobalExceptionHandler {
 
   private static final String ERROR_MESSAGE_FORMAT = "[EXCEPTION] path: {} | errorCode: {} | message: {}";
 
-  public void createLog(LogLevel logLevel, Exception e, String requestPath) {
+  private String getErrorCode(Exception e){
+    return e.getClass().getSimpleName().replace("Exception", "");
+  }
+
+  private void createLog(LogLevel logLevel, Exception e, String requestPath) {
+    String errorCode = getErrorCode(e);
     if (logLevel == LogLevel.NONE) {
       return;
     }
     if (logLevel == LogLevel.ERROR) {
       log.error(ERROR_MESSAGE_FORMAT, requestPath,
-          e.getClass().getSimpleName(),
+          errorCode,
           e.getMessage(), e);
     } else {
       log.warn(ERROR_MESSAGE_FORMAT, requestPath,
-          e.getClass().getSimpleName(),
+          errorCode,
           e.getMessage(), e);
     }
   }
@@ -37,7 +42,7 @@ public class GlobalExceptionHandler {
   public ResponseEntity<GlobalExceptionResponse> handleGlobalHttpException(GlobalHttpException e,
       HttpServletRequest request) {
     GlobalExceptionResponse response = new GlobalExceptionResponse(e.getStatus(),
-        e.getClass().getSimpleName(), e.getMessage(), request.getRequestURI());
+        getErrorCode(e), e.getMessage(), request.getRequestURI());
     createLog(e.getLogLevel(), e, request.getRequestURI());
     return ResponseEntity.status(e.getStatus()).body(response);
   }
@@ -46,7 +51,7 @@ public class GlobalExceptionHandler {
   public ResponseEntity<GlobalExceptionResponse> handleException(Exception e,
       HttpServletRequest request) {
     GlobalExceptionResponse response = new GlobalExceptionResponse(HttpStatus.INTERNAL_SERVER_ERROR,
-        e.getClass().getSimpleName(), e.getMessage(), request.getRequestURI());
+        getErrorCode(e), e.getMessage(), request.getRequestURI());
     createLog(LogLevel.ERROR, e, request.getRequestURI());
     return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
   }
