@@ -58,7 +58,7 @@ public class UserIntegrationTest extends IntegrationTest {
     mockMvc.perform(requestBuilder)
         .andDo(print())
         .andExpect(status().isBadRequest())
-        .andExpect(jsonPath("$.errorCode").value("DuplicatedUserException"))
+        .andExpect(jsonPath("$.errorCode").value("DuplicatedUser"))
         .andDo(print());
   }
 
@@ -88,7 +88,7 @@ public class UserIntegrationTest extends IntegrationTest {
     mockMvc.perform(requestBuilder)
         .andDo(print())
         .andExpect(status().isNotFound())
-        .andExpect(jsonPath("$.errorCode").value("UserNotFoundException"));
+        .andExpect(jsonPath("$.errorCode").value("UserNotFound"));
   }
 
   @Test
@@ -117,7 +117,7 @@ public class UserIntegrationTest extends IntegrationTest {
     mockMvc.perform(requestBuilder)
         .andDo(print())
         .andExpect(status().isNotFound())
-        .andExpect(jsonPath("$.errorCode").value("UserNotFoundException"));
+        .andExpect(jsonPath("$.errorCode").value("UserNotFound"));
   }
 
   @DisplayName("전체 user 조회시 200을 반환한다.")
