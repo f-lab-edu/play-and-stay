@@ -15,10 +15,11 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @Slf4j
 @RestControllerAdvice
 public class GlobalExceptionHandler {
+  
 
   private static final String ERROR_MESSAGE_FORMAT = "[EXCEPTION] path: {} | errorCode: {} | message: {}";
 
-  private String getErrorCode(Exception e){
+  private String getErrorCode(Exception e) {
     return e.getClass().getSimpleName().replace("Exception", "");
   }
 
