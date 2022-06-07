@@ -10,8 +10,9 @@ import lombok.Getter;
 @AllArgsConstructor
 public class UserDto {
 
-  private Long id;
-  private String name;
-  private String email;
-  private Date createdAt;
+  private final Long id;
+  private final String name;
+  private final String email;
+  private final Date createdAt;
+
 }

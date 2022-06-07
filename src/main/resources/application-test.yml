@@ -1,0 +1,20 @@
+spring:
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:testdb;MODE=MySQL;
+    username: sa
+    password:
+    initialization-mode: always
+    schema: classpath:mysql/schema.sql
+    data: classpath:mysql/data.sql
+  h2:
+    console:
+      enabled: true
+
+mybatis:
+  type-aliases-package: com.world.playstay.*.mapper
+  mapper-locations: mybatis/mapper/*.xml
+
+logging:
+  level:
+    root: ${LOGGING_LEVEL_ROOT:debug}
