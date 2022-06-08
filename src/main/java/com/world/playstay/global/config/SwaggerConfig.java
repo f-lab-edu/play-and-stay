@@ -1,4 +1,4 @@
-package com.world.playstay;
+package com.world.playstay.global.config;
 
 
 import io.swagger.v3.oas.models.OpenAPI;
@@ -21,6 +21,7 @@ public class SwaggerConfig {
   @Bean
   public OpenAPI springOpenAPI() {
     return new OpenAPI()
-        .info(new Info().title("Play and Stay").description("Play and Stay API document").version("v0.0.1"));
+        .info(new Info().title("Play and Stay").description("Play and Stay API document")
+            .version("v0.0.1"));
   }
 }
