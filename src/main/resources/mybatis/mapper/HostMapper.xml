@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.world.playstay.user.dao.HostMapper">
+  <insert id="insert" parameterType="com.world.playstay.user.entity.Host">
+    INSERT INTO HOST (first_name, last_name, nick_name, phone, email, encrypted_password)
+    VALUES (#{firstName}, #{lastName}, #{nickName}, #{phone}, #{email}, #{encryptedPassword})
+  </insert>
+
+  <delete id="delete" parameterType="Long">
+    DELETE FROM HOST WHERE id = #{id}
+  </delete>
+
+  <select id="findById" parameterType="Long"
+    resultType="com.world.playstay.user.entity.Host">
+    SELECT *
+    FROM HOST
+    WHERE id = #{id}
+  </select>
+
+  <select id="findByEmail" parameterType="String"
+    resultType="com.world.playstay.user.entity.Host">
+    SELECT *
+    FROM HOST
+    WHERE email = #{email}
+  </select>
+
+  <select id="findAll" parameterType="Long"
+    resultType="com.world.playstay.user.entity.Host">
+    SELECT *
+    FROM HOST
+    ORDER BY created_at DESC
+  </select>
+</mapper>
