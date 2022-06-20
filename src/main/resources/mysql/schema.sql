@@ -12,7 +12,8 @@ CREATE TABLE if not exists host
     membership_status  INT       DEFAULT 0                 NOT NULL,
     created_at         TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
     updated_at         TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
-    PRIMARY KEY (id)
+    PRIMARY KEY (id),
+    UNIQUE (email)
 );
 
 DROP TABLE IF EXISTS guest CASCADE;
@@ -32,5 +33,6 @@ CREATE TABLE if not exists guest
     count_coupon        INT       DEFAULT 0                 NOT NULL,
     created_at          TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
     updated_at          TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
-    PRIMARY KEY (id)
+    PRIMARY KEY (id),
+    UNIQUE (email)
 );
