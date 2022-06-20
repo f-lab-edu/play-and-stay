@@ -1,19 +1,16 @@
 package com.world.playstay.user.entity;
 
-import java.util.Date;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
+public abstract class User {
 
-@Getter
-@Builder
-@AllArgsConstructor
-public class User {
+  public enum AuthStatus {
+    UNAUTHENTICATED,
+    AUTHENTICATED,
+  }
 
-  private Long id;
-  private String name;
-  private String email;
-  private Date createdAt;
+  public enum UserType {
+    HOST,
+    GUEST,
+  }
 
 }
 
