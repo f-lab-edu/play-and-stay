@@ -1,12 +1,13 @@
 package com.world.playstay.user.service;
 
+import com.world.playstay.user.entity.User;
 import java.util.List;
 import java.util.Optional;
 
 /**
  * Host 와 Guest의 공통 메소드를 정의합니다.
  */
-public interface UserService<T> {
+public interface UserService<T extends User> {
 
   public void join(T user, String password);
 
