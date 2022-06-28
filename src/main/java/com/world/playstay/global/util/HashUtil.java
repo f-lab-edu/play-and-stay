@@ -1,6 +1,6 @@
 package com.world.playstay.global.util;
 
-import com.world.playstay.global.util.exception.EncryptException;
+import com.world.playstay.global.exception.EncryptFailException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -45,7 +45,7 @@ public class HashUtil {
       }
       return stringBuilder.toString();
     } catch (NoSuchAlgorithmException e) {
-      throw new EncryptException(e.toString());
+      throw new EncryptFailException(e.toString());
     }
   }
 
