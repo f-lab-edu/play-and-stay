@@ -1,4 +1,4 @@
-package com.world.playstay.global.error;
+package com.world.playstay.global.exception;
 
 import javax.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @Slf4j
 @RestControllerAdvice
 public class GlobalExceptionHandler {
-  
+
 
   private static final String ERROR_MESSAGE_FORMAT = "[EXCEPTION] path: {} | errorCode: {} | message: {}";
 

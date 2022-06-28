@@ -1,6 +1,6 @@
 package com.world.playstay.user.controller;
 
-import com.world.playstay.global.error.GlobalExceptionResponse;
+import com.world.playstay.global.exception.GlobalExceptionResponse;
 import com.world.playstay.user.dto.request.CreateHostRequest;
 import com.world.playstay.user.dto.response.HostResponse;
 import com.world.playstay.user.entity.Host;

@@ -1,4 +1,4 @@
-package com.world.playstay.global.error;
+package com.world.playstay.global.exception;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -8,7 +8,7 @@ import org.springframework.http.HttpStatus;
 @AllArgsConstructor
 public class GlobalExceptionResponse {
 
-  
+
   private final HttpStatus status;
   private final String errorCode;
   private final String message;
