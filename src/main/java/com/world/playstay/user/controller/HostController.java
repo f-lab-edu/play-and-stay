@@ -39,15 +39,6 @@ public class HostController {
   private final HostService hostService;
   private final HostMapstructMapper hostMapstructMapper;
 
-
-  private Host toEntity(HostRequest.Creation hostRequest) {
-    return hostMapstructMapper.toHost(hostRequest);
-  }
-
-  private HostResponse toResponse(Host host) {
-    return hostMapstructMapper.toResponse(host);
-  }
-
   @Operation(summary = "회원가입")
   @ApiResponses({
       @ApiResponse(responseCode = "201", description = "HOST CREATED"),
@@ -56,7 +47,7 @@ public class HostController {
   @ResponseStatus(HttpStatus.CREATED)
   @PostMapping()
   public void create(@RequestBody @Validated HostRequest.Creation hostRequest) {
-    Host host = toEntity(hostRequest);
+    Host host = hostMapstructMapper.toHost(hostRequest);
     hostService.join(host, hostRequest.getPassword());
   }
 
@@ -83,7 +74,7 @@ public class HostController {
   })
   @GetMapping("/{id}")
   public ResponseEntity<HostResponse> get(@PathVariable("id") Long id) {
-    HostResponse hostResponse = toResponse(hostService.getByIdOrElseThrow(id));
+    HostResponse hostResponse = hostMapstructMapper.toResponse(hostService.getByIdOrElseThrow(id));
     return ResponseEntity.ok().body(hostResponse);
   }
 
@@ -92,7 +83,7 @@ public class HostController {
   @GetMapping()
   public List<HostResponse> getList() {
     return hostService.getAll().stream()
-        .map(this::toResponse)
+        .map(hostMapstructMapper::toResponse)
         .collect(Collectors.toList());
   }
 

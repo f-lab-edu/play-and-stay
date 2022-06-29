@@ -2,7 +2,6 @@ package com.world.playstay.user.controller;
 
 import com.world.playstay.global.exception.GlobalExceptionResponse;
 import com.world.playstay.user.dto.request.GuestRequest;
-import com.world.playstay.user.dto.response.GuestResponse;
 import com.world.playstay.user.entity.Guest;
 import com.world.playstay.user.mapper.GuestMapstructMapper;
 import com.world.playstay.user.service.GuestService;
@@ -30,15 +29,6 @@ public class GuestController {
   private final GuestService guestService;
   private final GuestMapstructMapper guestMapstructMapper;
 
-
-  private Guest toEntity(GuestRequest.Creation guestRequest) {
-    return guestMapstructMapper.toGuest(guestRequest);
-  }
-
-  private GuestResponse toResponse(Guest guest) {
-    return guestMapstructMapper.toResponse(guest);
-  }
-
   @Operation(summary = "회원가입")
   @ApiResponses({
       @ApiResponse(responseCode = "201", description = "GUEST CREATED"),
@@ -47,7 +37,7 @@ public class GuestController {
   @ResponseStatus(HttpStatus.CREATED)
   @PostMapping()
   public void create(@RequestBody @Validated GuestRequest.Creation guestRequest) {
-    Guest guest = toEntity(guestRequest);
+    Guest guest = guestMapstructMapper.toGuest(guestRequest);
     guestService.join(guest, guestRequest.getPassword());
   }
 
