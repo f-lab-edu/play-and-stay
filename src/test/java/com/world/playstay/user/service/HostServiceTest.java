@@ -1,6 +1,7 @@
 package com.world.playstay.user.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
@@ -8,7 +9,9 @@ import static org.mockito.Mockito.when;
 
 import com.world.playstay.ServiceTest;
 import com.world.playstay.user.dao.HostMapper;
+import com.world.playstay.user.entity.AuthStatus;
 import com.world.playstay.user.entity.Host;
+import com.world.playstay.user.entity.Host.MemberShipStatus;
 import com.world.playstay.user.exception.DuplicatedUserException;
 import com.world.playstay.user.exception.UserNotFoundException;
 import java.util.Optional;
@@ -72,7 +75,7 @@ public class HostServiceTest extends ServiceTest {
     assertEquals(hostService.getByEmailOrElseNull(host.getEmail()), Optional.ofNullable(host));
     verify(hostMapper).findByEmail(host.getEmail());
   }
-  
+
 
   @Test
   @DisplayName("새로운 host를 생성한다.")
@@ -90,6 +93,9 @@ public class HostServiceTest extends ServiceTest {
 
     when(hostMapper.findByEmail(newHost.getEmail())).thenReturn(Optional.empty());
     hostService.join(newHost, password);
+    assertEquals(newHost.getAuthStatus(), AuthStatus.UNAUTHENTICATED.ordinal());
+    assertEquals(newHost.getMembershipStatus(), MemberShipStatus.BASIC.ordinal());
+    assertNotEquals(newHost.getEncryptedPassword(), password);
     verify(hostMapper).findByEmail(newHost.getEmail());
     verify(hostMapper).insert(newHost);
   }

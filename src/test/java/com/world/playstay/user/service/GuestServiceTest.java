@@ -1,6 +1,7 @@
 package com.world.playstay.user.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
@@ -8,6 +9,7 @@ import static org.mockito.Mockito.when;
 
 import com.world.playstay.ServiceTest;
 import com.world.playstay.user.dao.GuestMapper;
+import com.world.playstay.user.entity.AuthStatus;
 import com.world.playstay.user.entity.Guest;
 import com.world.playstay.user.exception.DuplicatedUserException;
 import com.world.playstay.user.exception.UserNotFoundException;
@@ -82,6 +84,10 @@ public class GuestServiceTest extends ServiceTest {
 
     when(guestMapper.findByEmail(newGuest.getEmail())).thenReturn(Optional.empty());
     guestService.join(newGuest, password);
+    assertEquals(newGuest.getAuthStatus(), AuthStatus.UNAUTHENTICATED.ordinal());
+    assertEquals(newGuest.getCountCoupon(), 0);
+    assertEquals(newGuest.getCountMonthlyStamp(), 0);
+    assertNotEquals(newGuest.getEncryptedPassword(), password);
     verify(guestMapper).findByEmail(newGuest.getEmail());
     verify(guestMapper).insert(newGuest);
   }
