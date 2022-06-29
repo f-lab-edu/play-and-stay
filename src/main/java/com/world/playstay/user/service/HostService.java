@@ -2,7 +2,9 @@ package com.world.playstay.user.service;
 
 import com.world.playstay.global.util.HashUtil;
 import com.world.playstay.user.dao.HostMapper;
+import com.world.playstay.user.entity.AuthStatus;
 import com.world.playstay.user.entity.Host;
+import com.world.playstay.user.entity.Host.MemberShipStatus;
 import com.world.playstay.user.exception.DuplicatedUserException;
 import com.world.playstay.user.exception.UserNotFoundException;
 import java.util.List;
@@ -21,7 +23,16 @@ public class HostService {
       throw new DuplicatedUserException("Host already exists with this email");
     });
     host.setEncryptedPassword(HashUtil.encryptSHA256(password));
+    setJoinHostStatus(host);
     hostMapper.insert(host);
+  }
+
+  private void setJoinHostStatus(Host host) {
+    /**
+     Host가 생성될 때 default status를 세팅합니다.
+     */
+    host.setAuthStatus(AuthStatus.UNAUTHENTICATED.ordinal());
+    host.setMembershipStatus(MemberShipStatus.BASIC.ordinal());
   }
 
   public void remove(Long id) {
