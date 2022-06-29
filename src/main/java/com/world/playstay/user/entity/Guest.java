@@ -12,7 +12,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-public class Guest extends User {
+public class Guest {
 
   private Long id;
   private String firstName;

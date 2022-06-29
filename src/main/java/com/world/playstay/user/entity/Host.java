@@ -10,7 +10,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-public class Host extends User {
+public class Host {
 
   public enum MemberShipStatus {
     BASIC,
