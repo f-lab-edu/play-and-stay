@@ -1,6 +1,6 @@
 package com.world.playstay.user.mapper;
 
-import com.world.playstay.user.dto.request.CreateGuestRequest;
+import com.world.playstay.user.dto.request.GuestRequest;
 import com.world.playstay.user.dto.response.GuestResponse;
 import com.world.playstay.user.entity.Guest;
 import org.mapstruct.Mapper;
@@ -14,7 +14,7 @@ import org.mapstruct.ReportingPolicy;
 )
 public interface GuestMapstructMapper {
 
-  Guest toGuest(CreateGuestRequest guestRequest);
+  Guest toGuest(GuestRequest.Creation guestRequest);
 
   GuestResponse toResponse(Guest guest);
 

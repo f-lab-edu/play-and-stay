@@ -1,6 +1,6 @@
 package com.world.playstay.user.mapper;
 
-import com.world.playstay.user.dto.request.CreateHostRequest;
+import com.world.playstay.user.dto.request.HostRequest;
 import com.world.playstay.user.dto.response.HostResponse;
 import com.world.playstay.user.entity.Host;
 import org.mapstruct.Mapper;
@@ -14,7 +14,7 @@ import org.mapstruct.ReportingPolicy;
 )
 public interface HostMapstructMapper {
 
-  Host toHost(CreateHostRequest HostRequest);
+  Host toHost(HostRequest.Creation hostRequest);
 
   HostResponse toResponse(Host host);
 

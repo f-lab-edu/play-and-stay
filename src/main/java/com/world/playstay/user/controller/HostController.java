@@ -1,7 +1,7 @@
 package com.world.playstay.user.controller;
 
 import com.world.playstay.global.exception.GlobalExceptionResponse;
-import com.world.playstay.user.dto.request.CreateHostRequest;
+import com.world.playstay.user.dto.request.HostRequest;
 import com.world.playstay.user.dto.response.HostResponse;
 import com.world.playstay.user.entity.Host;
 import com.world.playstay.user.mapper.HostMapstructMapper;
@@ -40,7 +40,7 @@ public class HostController {
   private final HostMapstructMapper hostMapstructMapper;
 
 
-  private Host toEntity(CreateHostRequest hostRequest) {
+  private Host toEntity(HostRequest.Creation hostRequest) {
     return hostMapstructMapper.toHost(hostRequest);
   }
 
@@ -55,9 +55,9 @@ public class HostController {
   })
   @ResponseStatus(HttpStatus.CREATED)
   @PostMapping()
-  public void create(@RequestBody @Validated CreateHostRequest createHostRequest) {
-    Host host = toEntity(createHostRequest);
-    hostService.join(host, createHostRequest.getPassword());
+  public void create(@RequestBody @Validated HostRequest.Creation hostRequest) {
+    Host host = toEntity(hostRequest);
+    hostService.join(host, hostRequest.getPassword());
   }
 
   @Operation(summary = "호스트 삭제")

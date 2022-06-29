@@ -1,7 +1,7 @@
 package com.world.playstay.user.controller;
 
 import com.world.playstay.global.exception.GlobalExceptionResponse;
-import com.world.playstay.user.dto.request.CreateGuestRequest;
+import com.world.playstay.user.dto.request.GuestRequest;
 import com.world.playstay.user.dto.response.GuestResponse;
 import com.world.playstay.user.entity.Guest;
 import com.world.playstay.user.mapper.GuestMapstructMapper;
@@ -31,7 +31,7 @@ public class GuestController {
   private final GuestMapstructMapper guestMapstructMapper;
 
 
-  private Guest toEntity(CreateGuestRequest guestRequest) {
+  private Guest toEntity(GuestRequest.Creation guestRequest) {
     return guestMapstructMapper.toGuest(guestRequest);
   }
 
@@ -46,9 +46,9 @@ public class GuestController {
   })
   @ResponseStatus(HttpStatus.CREATED)
   @PostMapping()
-  public void create(@RequestBody @Validated CreateGuestRequest createGuestRequest) {
-    Guest guest = toEntity(createGuestRequest);
-    guestService.join(guest, createGuestRequest.getPassword());
+  public void create(@RequestBody @Validated GuestRequest.Creation guestRequest) {
+    Guest guest = toEntity(guestRequest);
+    guestService.join(guest, guestRequest.getPassword());
   }
 
 }
