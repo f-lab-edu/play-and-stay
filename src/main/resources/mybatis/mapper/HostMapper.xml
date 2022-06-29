@@ -14,21 +14,24 @@
 
   <select id="findById" parameterType="Long"
     resultType="com.world.playstay.user.entity.Host">
-    SELECT *
+    SELECT id, first_name, last_name, nick_name, phone, email, encrypted_password,auth_status,
+    membership_status, created_at, updated_at
     FROM HOST
     WHERE id = #{id}
   </select>
 
   <select id="findByEmail" parameterType="String"
     resultType="com.world.playstay.user.entity.Host">
-    SELECT *
+    SELECT id, first_name, last_name, nick_name, phone, email, encrypted_password,auth_status,
+    membership_status, created_at, updated_at
     FROM HOST
     WHERE email = #{email}
   </select>
 
   <select id="findAll" parameterType="Long"
     resultType="com.world.playstay.user.entity.Host">
-    SELECT *
+    SELECT id, first_name, last_name, nick_name, phone, email, encrypted_password,auth_status,
+    membership_status, created_at, updated_at
     FROM HOST
     ORDER BY created_at DESC
   </select>

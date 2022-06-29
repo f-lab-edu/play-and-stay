@@ -5,7 +5,7 @@
 <mapper namespace="com.world.playstay.user.dao.GuestMapper">
   <insert id="insert" parameterType="com.world.playstay.user.entity.Guest">
     INSERT INTO GUEST (first_name, last_name, nick_name, phone, email, encrypted_password,
-    birth,country_code)
+    birth, country_code)
     VALUES (#{firstName}, #{lastName}, #{nickName}, #{phone}, #{email}, #{encryptedPassword},
     #{birth}, #{countryCode})
   </insert>
@@ -16,21 +16,24 @@
 
   <select id="findById" parameterType="Long"
     resultType="com.world.playstay.user.entity.Guest">
-    SELECT *
+    SELECT id, first_name, last_name, nick_name, phone, email, encrypted_password,auth_status,
+    birth, country_code,count_monthly_stamp, count_coupon, created_at, updated_at
     FROM GUEST
     WHERE id = #{id}
   </select>
 
   <select id="findByEmail" parameterType="String"
     resultType="com.world.playstay.user.entity.Guest">
-    SELECT *
+    SELECT id, first_name, last_name, nick_name, phone, email, encrypted_password,auth_status,
+    birth, country_code,count_monthly_stamp, count_coupon, created_at, updated_at
     FROM GUEST
     WHERE email = #{email}
   </select>
 
   <select id="findAll" parameterType="Long"
     resultType="com.world.playstay.user.entity.Guest">
-    SELECT *
+    SELECT id, first_name, last_name, nick_name, phone, email, encrypted_password,auth_status,
+    birth, country_code,count_monthly_stamp, count_coupon, created_at, updated_at
     FROM GUEST
     ORDER BY created_at DESC
   </select>
