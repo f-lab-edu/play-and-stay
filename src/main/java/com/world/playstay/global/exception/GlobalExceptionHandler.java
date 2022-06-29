@@ -52,7 +52,7 @@ public class GlobalExceptionHandler {
   public ResponseEntity<GlobalExceptionResponse> handleException(Exception e,
       HttpServletRequest request) {
     GlobalExceptionResponse response = new GlobalExceptionResponse(HttpStatus.INTERNAL_SERVER_ERROR,
-        getErrorCode(e), e.getMessage(), request.getRequestURI());
+        getErrorCode(e), null, request.getRequestURI());
     createLog(LogLevel.ERROR, e, request.getRequestURI());
     return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
   }
