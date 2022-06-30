@@ -71,13 +71,19 @@ jacocoTestReport {
         xml.enabled false
     }
     // jacocoTestReport 실행하고 jacocoTestCoverageVerification를 실행
-//    finalizedBy 'jacocoTestCoverageVerification'
+    finalizedBy 'jacocoTestCoverageVerification'
 }
 
 jacocoTestCoverageVerification {
     violationRules {
         rule {
             element = 'CLASS'
+
+            excludes = ['com.world.playstay.**.mapper.*',
+                        'com.world.playstay.global.exception.*',
+                        'com.world.playstay.**.dto.*',
+                        'com.world.playstay.PlaystayApplication',
+            ]
 
             limit {
                 counter = 'BRANCH'
