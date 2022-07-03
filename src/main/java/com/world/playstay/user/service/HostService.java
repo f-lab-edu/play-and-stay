@@ -23,17 +23,11 @@ public class HostService {
       throw new DuplicatedUserException("Host already exists with this email");
     });
     host.setEncryptedPassword(HashUtil.encryptSHA256(password));
-    setJoinHostStatus(host);
-    hostMapper.insert(host);
-  }
-
-  private void setJoinHostStatus(Host host) {
-    /**
-     Host가 생성될 때 default status를 세팅합니다.
-     */
     host.setAuthStatus(AuthStatus.UNAUTHENTICATED.ordinal());
     host.setMembershipStatus(MemberShipStatus.BASIC.ordinal());
+    hostMapper.insert(host);
   }
+  
 
   public void remove(Long id) {
     getByIdOrElseThrow(id);

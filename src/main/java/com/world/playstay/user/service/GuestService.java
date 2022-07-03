@@ -22,18 +22,12 @@ public class GuestService {
       throw new DuplicatedUserException("Guest already exists with this email");
     });
     guest.setEncryptedPassword(HashUtil.encryptSHA256(password));
-    setJoinGuestStatus(guest);
-    guestMapper.insert(guest);
-  }
-
-  private void setJoinGuestStatus(Guest guest) {
-    /**
-     Guest가 생성될 때 default status를 세팅합니다.
-     */
     guest.setAuthStatus(AuthStatus.UNAUTHENTICATED.ordinal());
     guest.setCountMonthlyStamp(0);
     guest.setCountCoupon(0);
+    guestMapper.insert(guest);
   }
+
 
   public void remove(Long id) {
     getByIdOrElseThrow(id);
