@@ -18,7 +18,7 @@ public class GuestService {
   private final GuestMapper guestMapper;
 
   public void join(Guest guest, String password) {
-    getByEmailOrElseNull(guest.getEmail()).ifPresent(Guest -> {
+    getByEmail(guest.getEmail()).ifPresent(Guest -> {
       throw new DuplicatedUserException("Guest already exists with this email");
     });
     guest.setEncryptedPassword(HashUtil.encryptSHA256(password));
@@ -40,11 +40,11 @@ public class GuestService {
         .orElseThrow(() -> new UserNotFoundException("Guest does not exist"));
   }
 
-  public Optional<Guest> getByIdOrElseNull(Long id) {
+  public Optional<Guest> getById(Long id) {
     return guestMapper.findById(id);
   }
 
-  public Optional<Guest> getByEmailOrElseNull(String email) {
+  public Optional<Guest> getByEmail(String email) {
     return guestMapper.findByEmail(email);
   }
 

@@ -62,17 +62,17 @@ public class HostServiceTest extends ServiceTest {
 
   @Test
   @DisplayName("id가 존재하는 host를 반환한다.")
-  public void getByIdOrElseNullSuccessTest() {
+  public void getByIdSuccessTest() {
     when(hostMapper.findById(host.getId())).thenReturn(Optional.ofNullable(host));
-    assertEquals(hostService.getByIdOrElseNull(host.getId()), Optional.ofNullable(host));
+    assertEquals(hostService.getById(host.getId()), Optional.ofNullable(host));
     verify(hostMapper).findById(host.getId());
   }
 
   @Test
   @DisplayName("email이 존재하는 host를 반환한다.")
-  public void getByEmailOrElseNullSuccessTest() {
+  public void getByEmailSuccessTest() {
     when(hostMapper.findByEmail(host.getEmail())).thenReturn(Optional.ofNullable(host));
-    assertEquals(hostService.getByEmailOrElseNull(host.getEmail()), Optional.ofNullable(host));
+    assertEquals(hostService.getByEmail(host.getEmail()), Optional.ofNullable(host));
     verify(hostMapper).findByEmail(host.getEmail());
   }
 

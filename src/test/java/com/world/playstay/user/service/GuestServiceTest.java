@@ -62,9 +62,9 @@ public class GuestServiceTest extends ServiceTest {
 
   @Test
   @DisplayName("id가 존재하는 guest를 반환한다.")
-  public void getByIdOrElseNullSuccessTest() {
+  public void getByIdSuccessTest() {
     when(guestMapper.findById(guest.getId())).thenReturn(Optional.ofNullable(guest));
-    assertEquals(guestService.getByIdOrElseNull(guest.getId()), Optional.ofNullable(guest));
+    assertEquals(guestService.getById(guest.getId()), Optional.ofNullable(guest));
     verify(guestMapper).findById(guest.getId());
   }
 

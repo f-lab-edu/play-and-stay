@@ -19,7 +19,7 @@ public class HostService {
   private final HostMapper hostMapper;
 
   public void join(Host host, String password) {
-    getByEmailOrElseNull(host.getEmail()).ifPresent(Host -> {
+    getByEmail(host.getEmail()).ifPresent(Host -> {
       throw new DuplicatedUserException("Host already exists with this email");
     });
     host.setEncryptedPassword(HashUtil.encryptSHA256(password));
@@ -40,12 +40,12 @@ public class HostService {
   }
 
 
-  public Optional<Host> getByIdOrElseNull(Long id) {
+  public Optional<Host> getById(Long id) {
     return hostMapper.findById(id);
   }
 
 
-  public Optional<Host> getByEmailOrElseNull(String email) {
+  public Optional<Host> getByEmail(String email) {
     return hostMapper.findByEmail(email);
   }
 
