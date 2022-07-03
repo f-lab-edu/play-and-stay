@@ -50,10 +50,12 @@ public class GlobalExceptionHandler {
   }
 
   @ExceptionHandler(Exception.class)
-  public ResponseEntity<Void> handleException(Exception e,
+  public ResponseEntity<GlobalExceptionResponse> handleException(Exception e,
       HttpServletRequest request) {
+    GlobalExceptionResponse response = new GlobalExceptionResponse(HttpStatus.INTERNAL_SERVER_ERROR,
+        getErrorCode(e), null, request.getRequestURI());
     createLog(LogLevel.ERROR, e, request.getRequestURI());
-    return new ResponseEntity<Void>(HttpStatus.INTERNAL_SERVER_ERROR);
+    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
   }
 
   @ExceptionHandler(MethodArgumentNotValidException.class)
