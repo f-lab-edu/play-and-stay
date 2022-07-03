@@ -2,9 +2,9 @@ package com.world.playstay.user.service;
 
 import com.world.playstay.global.util.HashUtil;
 import com.world.playstay.user.dao.HostMapper;
-import com.world.playstay.user.entity.AuthStatus;
 import com.world.playstay.user.entity.Host;
-import com.world.playstay.user.entity.Host.MemberShipStatus;
+import com.world.playstay.user.enums.AuthStatus;
+import com.world.playstay.user.enums.MemberShipStatus;
 import com.world.playstay.user.exception.DuplicatedUserException;
 import com.world.playstay.user.exception.UserNotFoundException;
 import java.util.List;

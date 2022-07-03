@@ -9,8 +9,8 @@ import static org.mockito.Mockito.when;
 
 import com.world.playstay.ServiceTest;
 import com.world.playstay.user.dao.GuestMapper;
-import com.world.playstay.user.entity.AuthStatus;
 import com.world.playstay.user.entity.Guest;
+import com.world.playstay.user.enums.AuthStatus;
 import com.world.playstay.user.exception.DuplicatedUserException;
 import com.world.playstay.user.exception.UserNotFoundException;
 import java.util.Optional;

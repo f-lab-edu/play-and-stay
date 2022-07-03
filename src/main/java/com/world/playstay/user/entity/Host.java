@@ -11,13 +11,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class Host {
-
-  public enum MemberShipStatus {
-    BASIC,
-    STANDARD,
-    PREMIUM
-  }
-
+  
   private Long id;
   private String firstName;
   private String lastName;
