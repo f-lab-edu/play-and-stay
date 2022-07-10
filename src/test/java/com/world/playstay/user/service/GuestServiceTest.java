@@ -84,7 +84,7 @@ public class GuestServiceTest extends ServiceTest {
 
     when(guestMapper.findByEmail(newGuest.getEmail())).thenReturn(Optional.empty());
     guestService.join(newGuest, password);
-    assertEquals(newGuest.getAuthStatus(), AuthStatus.UNAUTHENTICATED.ordinal());
+    assertEquals(newGuest.getAuthStatus(), AuthStatus.UNAUTHENTICATED);
     assertEquals(newGuest.getCountCoupon(), 0);
     assertEquals(newGuest.getCountMonthlyStamp(), 0);
     assertNotEquals(newGuest.getEncryptedPassword(), password);

@@ -1,5 +1,7 @@
 package com.world.playstay.user.dto.response;
 
+import com.world.playstay.user.enums.AuthStatus;
+import com.world.playstay.user.enums.MembershipStatus;
 import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -15,8 +17,8 @@ public class HostResponse {
   private String lastName;
   private String nickName;
   private String email;
-  private Integer authStatus;
-  private Integer membershipStatus;
+  private AuthStatus authStatus;
+  private MembershipStatus membershipStatus;
   private LocalDateTime createdAt;
   private LocalDateTime updatedAt;
 

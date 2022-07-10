@@ -4,7 +4,7 @@ import com.world.playstay.global.util.HashUtil;
 import com.world.playstay.user.dao.HostMapper;
 import com.world.playstay.user.entity.Host;
 import com.world.playstay.user.enums.AuthStatus;
-import com.world.playstay.user.enums.MemberShipStatus;
+import com.world.playstay.user.enums.MembershipStatus;
 import com.world.playstay.user.exception.DuplicatedUserException;
 import com.world.playstay.user.exception.UserNotFoundException;
 import java.util.List;
@@ -23,11 +23,11 @@ public class HostService {
       throw new DuplicatedUserException("Host already exists with this email");
     });
     host.setEncryptedPassword(HashUtil.encryptSHA256(password));
-    host.setAuthStatus(AuthStatus.UNAUTHENTICATED.ordinal());
-    host.setMembershipStatus(MemberShipStatus.BASIC.ordinal());
+    host.setAuthStatus(AuthStatus.UNAUTHENTICATED);
+    host.setMembershipStatus(MembershipStatus.BASIC);
     hostMapper.insert(host);
   }
-  
+
 
   public void remove(Long id) {
     getByIdOrElseThrow(id);
