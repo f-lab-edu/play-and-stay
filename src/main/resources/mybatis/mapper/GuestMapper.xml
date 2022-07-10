@@ -5,9 +5,9 @@
 <mapper namespace="com.world.playstay.user.dao.GuestMapper">
   <insert id="insert" parameterType="com.world.playstay.user.entity.Guest">
     INSERT INTO GUEST (first_name, last_name, nick_name, phone, email, encrypted_password,
-    birth, country_code)
+    birth, country_code, auth_status, count_monthly_stamp, count_coupon)
     VALUES (#{firstName}, #{lastName}, #{nickName}, #{phone}, #{email}, #{encryptedPassword},
-    #{birth}, #{countryCode})
+    #{birth}, #{countryCode}, #{authStatus}, #{countMonthlyStamp}, #{countCoupon})
   </insert>
 
   <delete id="delete" parameterType="Long">

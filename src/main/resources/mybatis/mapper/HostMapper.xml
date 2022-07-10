@@ -4,8 +4,10 @@
 
 <mapper namespace="com.world.playstay.user.dao.HostMapper">
   <insert id="insert" parameterType="com.world.playstay.user.entity.Host">
-    INSERT INTO HOST (first_name, last_name, nick_name, phone, email, encrypted_password)
-    VALUES (#{firstName}, #{lastName}, #{nickName}, #{phone}, #{email}, #{encryptedPassword})
+    INSERT INTO HOST (first_name, last_name, nick_name, phone, email, encrypted_password,
+    auth_status, membership_status)
+    VALUES (#{firstName}, #{lastName}, #{nickName}, #{phone}, #{email}, #{encryptedPassword},
+    #{authStatus}, #{membershipStatus})
   </insert>
 
   <delete id="delete" parameterType="Long">
