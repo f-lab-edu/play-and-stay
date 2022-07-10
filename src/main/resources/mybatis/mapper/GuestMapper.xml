@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.world.playstay.user.dao.GuestMapper">
+  <insert id="insert" parameterType="com.world.playstay.user.entity.Guest">
+    INSERT INTO GUEST (first_name, last_name, nick_name, phone, email, encrypted_password,
+    birth, country_code)
+    VALUES (#{firstName}, #{lastName}, #{nickName}, #{phone}, #{email}, #{encryptedPassword},
+    #{birth}, #{countryCode})
+  </insert>
+
+  <delete id="delete" parameterType="Long">
+    DELETE FROM GUEST WHERE id = #{id}
+  </delete>
+
+  <select id="findById" parameterType="Long"
+    resultType="com.world.playstay.user.entity.Guest">
+    SELECT id, first_name, last_name, nick_name, phone, email, encrypted_password,auth_status,
+    birth, country_code,count_monthly_stamp, count_coupon, created_at, updated_at
+    FROM GUEST
+    WHERE id = #{id}
+  </select>
+
+  <select id="findByEmail" parameterType="String"
+    resultType="com.world.playstay.user.entity.Guest">
+    SELECT id, first_name, last_name, nick_name, phone, email, encrypted_password,auth_status,
+    birth, country_code,count_monthly_stamp, count_coupon, created_at, updated_at
+    FROM GUEST
+    WHERE email = #{email}
+  </select>
+
+  <select id="findAll" parameterType="Long"
+    resultType="com.world.playstay.user.entity.Guest">
+    SELECT id, first_name, last_name, nick_name, phone, email, encrypted_password,auth_status,
+    birth, country_code,count_monthly_stamp, count_coupon, created_at, updated_at
+    FROM GUEST
+    ORDER BY created_at DESC
+  </select>
+</mapper>

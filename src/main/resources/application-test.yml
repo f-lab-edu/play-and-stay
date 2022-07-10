@@ -11,10 +11,6 @@ spring:
     console:
       enabled: true
 
-mybatis:
-  type-aliases-package: com.world.playstay.*.mapper
-  mapper-locations: mybatis/mapper/*.xml
-
 logging:
   level:
     root: ${LOGGING_LEVEL_ROOT:debug}
