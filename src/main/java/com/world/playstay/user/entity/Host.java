@@ -1,5 +1,7 @@
 package com.world.playstay.user.entity;
 
+import com.world.playstay.user.enums.AuthStatus;
+import com.world.playstay.user.enums.MembershipStatus;
 import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,7 +13,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class Host {
-  
+
   private Long id;
   private String firstName;
   private String lastName;
@@ -19,8 +21,8 @@ public class Host {
   private String phone;
   private String email;
   private String encryptedPassword;
-  private Integer authStatus;
-  private Integer membershipStatus;
+  private AuthStatus authStatus;
+  private MembershipStatus membershipStatus;
   private LocalDateTime createdAt;
   private LocalDateTime updatedAt;
 

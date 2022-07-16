@@ -1,6 +1,7 @@
 package com.world.playstay.user.entity;
 
 
+import com.world.playstay.user.enums.AuthStatus;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
@@ -21,7 +22,7 @@ public class Guest {
   private String phone;
   private String email;
   private String encryptedPassword;
-  private Integer authStatus;
+  private AuthStatus authStatus;
   private LocalDate birth;
   private Integer countryCode;
   private Integer countMonthlyStamp;

@@ -2,9 +2,10 @@ spring:
   profiles:
     active: ${ENV:local}
 
-    
+
 mybatis:
   type-aliases-package: com.world.playstay.*.mapper
   mapper-locations: mybatis/mapper/*.xml
   configuration:
     map-underscore-to-camel-case: true
+    typeHandlers: com.world.playstay.user.enums.AuthStatus$TypeHandler, com.world.playstay.user.enums.MembershipStatus$TypeHandler

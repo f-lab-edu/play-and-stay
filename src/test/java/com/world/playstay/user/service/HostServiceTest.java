@@ -11,7 +11,7 @@ import com.world.playstay.ServiceTest;
 import com.world.playstay.user.dao.HostMapper;
 import com.world.playstay.user.entity.Host;
 import com.world.playstay.user.enums.AuthStatus;
-import com.world.playstay.user.enums.MemberShipStatus;
+import com.world.playstay.user.enums.MembershipStatus;
 import com.world.playstay.user.exception.DuplicatedUserException;
 import com.world.playstay.user.exception.UserNotFoundException;
 import java.util.Optional;
@@ -93,8 +93,8 @@ public class HostServiceTest extends ServiceTest {
 
     when(hostMapper.findByEmail(newHost.getEmail())).thenReturn(Optional.empty());
     hostService.join(newHost, password);
-    assertEquals(newHost.getAuthStatus(), AuthStatus.UNAUTHENTICATED.ordinal());
-    assertEquals(newHost.getMembershipStatus(), MemberShipStatus.BASIC.ordinal());
+    assertEquals(newHost.getAuthStatus(), AuthStatus.UNAUTHENTICATED);
+    assertEquals(newHost.getMembershipStatus(), MembershipStatus.BASIC);
     assertNotEquals(newHost.getEncryptedPassword(), password);
     verify(hostMapper).findByEmail(newHost.getEmail());
     verify(hostMapper).insert(newHost);

@@ -4,13 +4,14 @@ import com.world.playstay.global.enums.GlobalEnum;
 import com.world.playstay.global.enums.GlobalEnumTypeHandler;
 import org.apache.ibatis.type.MappedTypes;
 
-public enum AuthStatus implements GlobalEnum {
-  UNAUTHENTICATED("UNAUTHENTICATED"),
-  AUTHENTICATED("AUTHENTICATED");
+public enum MembershipStatus implements GlobalEnum {
+  BASIC("BASIC"),
+  STANDARD("STANDARD"),
+  PREMIUM("PREMIUM");
 
   private final String code;
 
-  AuthStatus(String code) {
+  MembershipStatus(String code) {
     this.code = code;
   }
 
@@ -19,12 +20,11 @@ public enum AuthStatus implements GlobalEnum {
     return code;
   }
 
-  @MappedTypes(AuthStatus.class)
-  public static class TypeHandler extends GlobalEnumTypeHandler<AuthStatus> {
+  @MappedTypes(MembershipStatus.class)
+  public static class TypeHandler extends GlobalEnumTypeHandler<MembershipStatus> {
 
     public TypeHandler() {
-      super(AuthStatus.class);
+      super(MembershipStatus.class);
     }
   }
-
 }

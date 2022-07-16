@@ -22,7 +22,7 @@ public class GuestService {
       throw new DuplicatedUserException("Guest already exists with this email");
     });
     guest.setEncryptedPassword(HashUtil.encryptSHA256(password));
-    guest.setAuthStatus(AuthStatus.UNAUTHENTICATED.ordinal());
+    guest.setAuthStatus(AuthStatus.UNAUTHENTICATED);
     guest.setCountMonthlyStamp(0);
     guest.setCountCoupon(0);
     guestMapper.insert(guest);
