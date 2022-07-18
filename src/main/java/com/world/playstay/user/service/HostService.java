@@ -34,6 +34,13 @@ public class HostService {
     hostMapper.delete(id);
   }
 
+  public Long validateLoginInfoOrElseThrow(String email, String password) {
+    Host host = hostMapper.findByEmailAndPassword(email, password)
+        .orElseThrow(
+            () -> new UserNotFoundException("No host exists in this email, password"));
+    return host.getId();
+  }
+
   public Host getByIdOrElseThrow(Long id) {
     return hostMapper.findById(id)
         .orElseThrow(() -> new UserNotFoundException("Host does not exist"));

@@ -17,6 +17,8 @@ public interface GuestMapper {
 
   Optional<Guest> findByEmail(String email);
 
+  Optional<Guest> findByEmailAndPassword(String email, String encryptedPassword);
+
   List<Guest> findAll();
 
 }

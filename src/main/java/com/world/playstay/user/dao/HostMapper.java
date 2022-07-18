@@ -16,5 +16,7 @@ public interface HostMapper {
 
   Optional<Host> findByEmail(String email);
 
+  Optional<Host> findByEmailAndPassword(String email, String encryptedPassword);
+
   List<Host> findAll();
 }
