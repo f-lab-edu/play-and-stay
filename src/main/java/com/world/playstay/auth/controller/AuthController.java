@@ -4,6 +4,7 @@ import com.world.playstay.auth.dto.request.LoginRequest;
 import com.world.playstay.auth.dto.request.LogoutRequest;
 import com.world.playstay.auth.dto.response.LoginResponse;
 import com.world.playstay.auth.service.AuthService;
+import com.world.playstay.global.annotation.SessionAuthAnnotation;
 import com.world.playstay.global.exception.GlobalExceptionResponse;
 import com.world.playstay.user.entity.Guest;
 import com.world.playstay.user.entity.Host;
@@ -65,6 +66,7 @@ public class AuthController {
       @ApiResponse(responseCode = "200", description = "LOGOUT SUCCESSFULLY"),
   })
   @PostMapping("/logout")
+  @SessionAuthAnnotation(userType = {UserType.GUEST, UserType.HOST})
   public ResponseEntity<Void> logout(@RequestBody @Validated LogoutRequest logoutRequest,
       HttpServletRequest httpServletRequest) {
     authService.logout(httpServletRequest, logoutRequest.getLoginMethod());
