@@ -47,13 +47,12 @@ public class AuthService {
     loginService.invalidateLoginStatus(httpServletRequest);
   }
 
-  public User validateUser(String password, String email, UserType userType) {
+  public User validateUser(String email, String password, UserType userType) {
     // 비밀번호 암호화
     String encryptedPassword = HashUtil.encryptSHA256(password);
 
-    return userType == UserType.GUEST ? guestService.validateLoginInfoOrElseThrow(
-        email,
-        encryptedPassword)
+    return userType == UserType.GUEST ?
+        guestService.validateLoginInfoOrElseThrow(email, encryptedPassword)
         : hostService.validateLoginInfoOrElseThrow(email, encryptedPassword);
   }
 
