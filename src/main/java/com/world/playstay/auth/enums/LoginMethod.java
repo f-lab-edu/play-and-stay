@@ -7,13 +7,19 @@ import lombok.Getter;
 @Getter
 public enum LoginMethod {
 
-  SESSION(SessionLoginService.class.getName()),
-  JWT(JwtLoginService.class.getName());
+  SESSION(SessionLoginService.class.getSimpleName()),
+  JWT(JwtLoginService.class.getSimpleName());
 
   private final String beanName;
 
   LoginMethod(String beanName) {
-    this.beanName = beanName;
+    this.beanName = makeBeanName(beanName);
+  }
+
+  private String makeBeanName(String className) {
+    StringBuilder sb = new StringBuilder();
+    String firstLetter = className.substring(0, 1).toLowerCase();
+    return sb.append(firstLetter).append(className.substring(1)).toString();
   }
 
 }
