@@ -1,13 +1,16 @@
 package com.world.playstay.auth.service;
 
-import com.world.playstay.auth.dto.request.LoginRequest;
+import com.world.playstay.user.enums.UserType;
 import javax.servlet.http.HttpServletRequest;
 
 public interface LoginService {
 
-  boolean setLoginStatus(HttpServletRequest httpServletRequest, LoginRequest loginRequest);
+  void setLoginStatus(
+      HttpServletRequest httpServletRequest,
+      String email,
+      UserType userType);
 
-  boolean validateLoginStatus(HttpServletRequest httpServletRequest);
+  void validateLoginStatus(HttpServletRequest httpServletRequest);
 
   void invalidateLoginStatus(HttpServletRequest httpServletRequest);
 
