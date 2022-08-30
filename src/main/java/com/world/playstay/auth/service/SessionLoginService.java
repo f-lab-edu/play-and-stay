@@ -43,6 +43,24 @@ public class SessionLoginService implements LoginService {
     }
   }
 
+  public void validateHostLoginStatus(HttpServletRequest httpServletRequest) {
+    HttpSession httpSession = httpServletRequest.getSession(false);
+
+    if (httpSession.getAttribute(SessionConstant.SESSION_USER_TYPE) != UserType.HOST) {
+      throw new InvalidHttpSessionException("Invalid host session type");
+    }
+    validateLoginStatus(httpServletRequest);
+  }
+
+  public void validateGuestLoginStatus(HttpServletRequest httpServletRequest) {
+    HttpSession httpSession = httpServletRequest.getSession(false);
+
+    if (httpSession.getAttribute(SessionConstant.SESSION_USER_TYPE) != UserType.GUEST) {
+      throw new InvalidHttpSessionException("Invalid guest session type");
+    }
+    validateLoginStatus(httpServletRequest);
+  }
+
 
   @Override
   public void invalidateLoginStatus(HttpServletRequest httpServletRequest) {
