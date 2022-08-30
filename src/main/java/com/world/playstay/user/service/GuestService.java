@@ -34,10 +34,10 @@ public class GuestService {
     guestMapper.delete(id);
   }
 
-  public Long validateLoginInfoOrElseThrow(String email, String password) {
+  public Guest validateLoginInfoOrElseThrow(String email, String password) {
     Guest guest = guestMapper.findByEmailAndPassword(email, password)
         .orElseThrow(() -> new UserNotFoundException("No guest exists in this email, password"));
-    return guest.getId();
+    return guest;
   }
 
 
