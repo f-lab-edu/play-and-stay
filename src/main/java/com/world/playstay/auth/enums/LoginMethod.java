@@ -12,8 +12,8 @@ public enum LoginMethod {
 
   private final String beanName;
 
-  LoginMethod(String beanName) {
-    this.beanName = makeBeanName(beanName);
+  LoginMethod(String className) {
+    this.beanName = makeBeanName(className);
   }
 
   private String makeBeanName(String className) {
