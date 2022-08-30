@@ -15,11 +15,15 @@ public class SessionLoginService implements LoginService {
   private static final String SESSION_LOG_INFO_FORMAT = "[HttpSession] User Type = {} Email = {} {}";
   private static final String SESSION_LOG_ERROR_FORMAT = "[HttpSession] {}";
 
+  public HttpSession getHttpSession(HttpServletRequest httpServletRequest, boolean create) {
+    return httpServletRequest.getSession(create);
+  }
+
   @Override
   public void setLoginStatus(HttpServletRequest httpServletRequest,
       String email,
       UserType userType) {
-    HttpSession httpSession = httpServletRequest.getSession(true);
+    HttpSession httpSession = getHttpSession(httpServletRequest, true);
 
     httpSession.setAttribute(SessionConstant.SESSION_ID, email);
     httpSession.setAttribute(SessionConstant.SESSION_USER_TYPE, userType);
@@ -31,7 +35,11 @@ public class SessionLoginService implements LoginService {
 
   @Override
   public void validateLoginStatus(HttpServletRequest httpServletRequest) {
-    HttpSession httpSession = httpServletRequest.getSession(false);
+    HttpSession httpSession = getHttpSession(httpServletRequest, false);
+    validateHttpSession(httpSession);
+  }
+
+  public void validateHttpSession(HttpSession httpSession) {
     try {
       if (httpSession.getAttribute(SessionConstant.SESSION_ID) == null
           || httpSession.getAttribute(SessionConstant.SESSION_USER_TYPE) == null) {
@@ -44,27 +52,27 @@ public class SessionLoginService implements LoginService {
   }
 
   public void validateHostLoginStatus(HttpServletRequest httpServletRequest) {
-    HttpSession httpSession = httpServletRequest.getSession(false);
+    HttpSession httpSession = getHttpSession(httpServletRequest, false);
 
     if (httpSession.getAttribute(SessionConstant.SESSION_USER_TYPE) != UserType.HOST) {
       throw new InvalidHttpSessionException("Invalid host session type");
     }
-    validateLoginStatus(httpServletRequest);
+    validateHttpSession(httpSession);
   }
 
   public void validateGuestLoginStatus(HttpServletRequest httpServletRequest) {
-    HttpSession httpSession = httpServletRequest.getSession(false);
+    HttpSession httpSession = getHttpSession(httpServletRequest, false);
 
     if (httpSession.getAttribute(SessionConstant.SESSION_USER_TYPE) != UserType.GUEST) {
       throw new InvalidHttpSessionException("Invalid guest session type");
     }
-    validateLoginStatus(httpServletRequest);
+    validateHttpSession(httpSession);
   }
 
 
   @Override
   public void invalidateLoginStatus(HttpServletRequest httpServletRequest) {
-    HttpSession httpSession = httpServletRequest.getSession(false);
+    HttpSession httpSession = getHttpSession(httpServletRequest, false);
     if (httpSession != null) {
       httpSession.invalidate();
       log.info(SESSION_LOG_INFO_FORMAT,
