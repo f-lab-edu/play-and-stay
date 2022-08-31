@@ -13,7 +13,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-public class Guest {
+public class Guest extends User {
 
   private Long id;
   private String firstName;

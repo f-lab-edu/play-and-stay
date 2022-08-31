@@ -12,7 +12,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-public class Host {
+public class Host extends User {
 
   private Long id;
   private String firstName;

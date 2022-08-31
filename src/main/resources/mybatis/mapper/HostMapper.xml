@@ -30,6 +30,14 @@
     WHERE email = #{email}
   </select>
 
+  <select id="findByEmailAndPassword" parameterType="String"
+    resultType="com.world.playstay.user.entity.Host">
+    SELECT id, first_name, last_name, nick_name, phone, email, encrypted_password,auth_status,
+    membership_status, created_at, updated_at
+    FROM HOST
+    WHERE email = #{email} AND encrypted_password = #{encryptedPassword}
+  </select>
+
   <select id="findAll" parameterType="Long"
     resultType="com.world.playstay.user.entity.Host">
     SELECT id, first_name, last_name, nick_name, phone, email, encrypted_password,auth_status,

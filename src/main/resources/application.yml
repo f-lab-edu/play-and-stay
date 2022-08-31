@@ -9,3 +9,8 @@ mybatis:
   configuration:
     map-underscore-to-camel-case: true
     typeHandlers: com.world.playstay.user.enums.AuthStatus$TypeHandler, com.world.playstay.user.enums.MembershipStatus$TypeHandler
+    
+server:
+  servlet:
+    session:
+      timeout: 60m
